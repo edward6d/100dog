@@ -1,0 +1,48 @@
+[gd_scene load_steps=10 format=3 uid="uid://ctaxj8b0gmyg"]
+
+[ext_resource type="Texture2D" uid="uid://bd3yw5sclx355" path="res://icon.svg" id="1_4quru"]
+[ext_resource type="Script" path="res://days/day001/Icon.gd" id="2_n0btc"]
+[ext_resource type="Texture2D" uid="uid://s1iooykxrp22" path="res://days/day001/textures/white_square_100x100.png" id="2_pb5b1"]
+[ext_resource type="Shader" path="res://days/day001/Day001.gdshader" id="2_v6shs"]
+[ext_resource type="Shader" path="res://days/day001/Day001_2.gdshader" id="4_mxumr"]
+[ext_resource type="Texture2D" uid="uid://buqrjd1hsnr68" path="res://days/day001/textures/Wall_Stone_010_basecolor.jpg" id="5_7opw4"]
+[ext_resource type="AudioStream" uid="uid://cs7ranmgs6ofw" path="res://days/day001/qubodup-crash.ogg" id="7_hsk51"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_13iwt"]
+resource_local_to_scene = true
+shader = ExtResource("2_v6shs")
+shader_parameter/tempo = 1.435
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5bmg1"]
+shader = ExtResource("4_mxumr")
+shader_parameter/tempo = 0.841
+
+[node name="Day001" type="Node2D"]
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+z_index = -1
+material = SubResource("ShaderMaterial_13iwt")
+position = Vector2(-96, -35)
+texture = ExtResource("2_pb5b1")
+texture_scale = Vector2(0.1, 0.1)
+polygon = PackedVector2Array(-111, -82, 1423, -80, 1425, 800, -207, 798)
+
+[node name="Polygon2D2" type="Polygon2D" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_5bmg1")
+position = Vector2(-8, -6)
+texture = ExtResource("5_7opw4")
+polygon = PackedVector2Array(856, 781, 850, 309, 859, -237, 1437, -217, 1354, 792)
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(364, 236)
+texture = ExtResource("1_4quru")
+script = ExtResource("2_n0btc")
+
+[node name="Timer" type="Timer" parent="Icon"]
+autostart = true
+
+[node name="CrashPlayer" type="AudioStreamPlayer" parent="Icon"]
+stream = ExtResource("7_hsk51")
+
+[connection signal="timeout" from="Icon/Timer" to="Icon" method="_on_timer_timeout"]
