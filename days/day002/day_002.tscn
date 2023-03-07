@@ -1,0 +1,70 @@
+[gd_scene load_steps=4 format=3 uid="uid://d2epkkj4xrjgb"]
+
+[ext_resource type="Theme" uid="uid://dvma32iovue4" path="res://days/day002/resources/pixel_theme.tres" id="1_o46n2"]
+[ext_resource type="Script" path="res://days/day002/day_002.gd" id="2_7b4vt"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rl8rk"]
+font_size = 64
+
+[node name="Day002" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_o46n2")
+script = ExtResource("2_7b4vt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_o46n2")
+text = "Clicky Grower"
+label_settings = SubResource("LabelSettings_rl8rk")
+horizontal_alignment = 1
+
+[node name="ResourceGridContainer" type="GridContainer" parent="VBoxContainer"]
+layout_mode = 2
+columns = 3
+
+[node name="WoodLabel" type="Label" parent="VBoxContainer/ResourceGridContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "Wood"
+
+[node name="WoodAmount" type="Label" parent="VBoxContainer/ResourceGridContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "0"
+horizontal_alignment = 2
+
+[node name="WoodButton" type="Button" parent="VBoxContainer/ResourceGridContainer"]
+layout_mode = 2
+text = "Chop a tree"
+
+[node name="LumberjackLabel" type="Label" parent="VBoxContainer/ResourceGridContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "Lumberjacks
+"
+
+[node name="LumberjackAmount" type="Label" parent="VBoxContainer/ResourceGridContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "0"
+horizontal_alignment = 2
+
+[node name="LumberjackButton" type="Button" parent="VBoxContainer/ResourceGridContainer"]
+layout_mode = 2
+text = "Hire a lumberjack"
+
+[connection signal="pressed" from="VBoxContainer/ResourceGridContainer/WoodButton" to="." method="_on_wood_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ResourceGridContainer/LumberjackButton" to="." method="_on_lumberjack_button_pressed"]
