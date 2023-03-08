@@ -1,0 +1,78 @@
+[gd_scene load_steps=3 format=3 uid="uid://di0p5etvmdfbr"]
+
+[ext_resource type="Script" path="res://days/day003/PongBoard.gd" id="1_08wit"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1r4no"]
+friction = 0.0
+bounce = 1.16
+
+[node name="Day003" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PongBoard" type="Node2D" parent="."]
+script = ExtResource("1_08wit")
+
+[node name="Background" type="Polygon2D" parent="PongBoard"]
+z_index = -1
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(0, 0, 1152, 0, 1152, 648, 0, 648)
+
+[node name="UpperWallBody" type="StaticBody2D" parent="PongBoard"]
+position = Vector2(-100, -100)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PongBoard/UpperWallBody"]
+polygon = PackedVector2Array(0, 0, 1352, 0, 1352, 100, 0, 100)
+
+[node name="LowerWallBody" type="StaticBody2D" parent="PongBoard"]
+position = Vector2(-100, 648)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PongBoard/LowerWallBody"]
+polygon = PackedVector2Array(0, 0, 1352, 0, 1352, 100, 0, 100)
+
+[node name="PlayerPaddleBody" type="CharacterBody2D" parent="PongBoard"]
+position = Vector2(10, 324)
+motion_mode = 1
+
+[node name="PaddlePolygon" type="Polygon2D" parent="PongBoard/PlayerPaddleBody"]
+polygon = PackedVector2Array(-10, -40, 10, -40, 10, 40, -10, 40)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PongBoard/PlayerPaddleBody"]
+polygon = PackedVector2Array(-10, -40, 10, -40, 10, 40, -10, 40)
+
+[node name="EnemyPaddleBody" type="CharacterBody2D" parent="PongBoard"]
+position = Vector2(1142, 324)
+motion_mode = 1
+
+[node name="PaddlePolygon" type="Polygon2D" parent="PongBoard/EnemyPaddleBody"]
+polygon = PackedVector2Array(-10, -40, 10, -40, 10, 40, -10, 40)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PongBoard/EnemyPaddleBody"]
+polygon = PackedVector2Array(-10, -40, 10, -40, 10, 40, -10, 40)
+
+[node name="PlayerGoalZone" type="Area2D" parent="PongBoard"]
+position = Vector2(-100, 0)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PongBoard/PlayerGoalZone"]
+polygon = PackedVector2Array(0, 0, 100, 0, 100, 648, 0, 648)
+
+[node name="EnemyGoalZone" type="Area2D" parent="PongBoard"]
+position = Vector2(1152, 0)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PongBoard/EnemyGoalZone"]
+polygon = PackedVector2Array(0, 0, 100, 0, 100, 648, 0, 648)
+
+[node name="BallBody" type="RigidBody2D" parent="PongBoard"]
+position = Vector2(576, 324)
+physics_material_override = SubResource("PhysicsMaterial_1r4no")
+gravity_scale = 0.0
+
+[node name="Polygon2D" type="Polygon2D" parent="PongBoard/BallBody"]
+polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PongBoard/BallBody"]
+polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)

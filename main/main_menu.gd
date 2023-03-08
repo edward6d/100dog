@@ -6,6 +6,7 @@ extends Control
 var days = [
 	[1, "Turbo Tumbler"],
 	[2, "Clicky Grower"],
+	[3, "Pong"],
 ]
 
 func create_day_button(day):
