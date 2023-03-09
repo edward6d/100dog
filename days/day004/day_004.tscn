@@ -1,0 +1,91 @@
+[gd_scene load_steps=12 format=3 uid="uid://c3r0ghy16qdr4"]
+
+[ext_resource type="Script" path="res://days/day004/Player.gd" id="1_01llk"]
+[ext_resource type="Script" path="res://days/day004/day_004.gd" id="1_3q1p5"]
+[ext_resource type="Texture2D" uid="uid://vbbhbqnqaj0x" path="res://common/assets/characters_packed.png" id="1_jmswk"]
+[ext_resource type="Texture2D" uid="uid://01chxsad7h8r" path="res://common/assets/tiles_packed.png" id="2_yemdc"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l7wkd"]
+texture = ExtResource("2_yemdc")
+texture_region_size = Vector2i(18, 18)
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-9, -9, 9, -9, 9, 9, -9, 9)
+2:0/0 = 0
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-9, -9, 9, -9, 9, 9, -9, 9)
+3:0/0 = 0
+3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:0/0/physics_layer_0/angular_velocity = 0.0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-9, -9, 9, -9, 9, 9, -9, 9)
+
+[sub_resource type="TileSet" id="TileSet_i1o4j"]
+tile_size = Vector2i(18, 18)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_l7wkd")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0tn6r"]
+atlas = ExtResource("1_jmswk")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ei51j"]
+atlas = ExtResource("1_jmswk")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p32ev"]
+atlas = ExtResource("1_jmswk")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fvcgm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0tn6r")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ei51j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p32ev")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cu2xc"]
+height = 24.0
+
+[node name="Day004" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3q1p5")
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="TileMap" type="TileMap" parent="World"]
+tile_set = SubResource("TileSet_i1o4j")
+format = 2
+layer_0/tile_data = PackedInt32Array(1376286, 131072, 0, 1376287, 131072, 0, 1376288, 131072, 0, 1376289, 131072, 0, 1376290, 131072, 0, 1376291, 196608, 0, 1376285, 65536, 0)
+
+[node name="Player" type="CharacterBody2D" parent="World"]
+position = Vector2(576, 324)
+script = ExtResource("1_01llk")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="World/Player"]
+sprite_frames = SubResource("SpriteFrames_fvcgm")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Player"]
+shape = SubResource("CapsuleShape2D_cu2xc")

@@ -7,6 +7,7 @@ var days = [
 	[1, "Turbo Tumbler"],
 	[2, "Clicky Grower"],
 	[3, "Pong"],
+	[4, "Angry Ascent"],
 ]
 
 func create_day_button(day):
