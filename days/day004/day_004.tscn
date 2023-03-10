@@ -71,13 +71,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3q1p5")
+_tile_map_path = NodePath("World/TileMap")
 
 [node name="World" type="Node2D" parent="."]
 
 [node name="TileMap" type="TileMap" parent="World"]
 tile_set = SubResource("TileSet_i1o4j")
 format = 2
-layer_0/tile_data = PackedInt32Array(1376286, 131072, 0, 1376287, 131072, 0, 1376288, 131072, 0, 1376289, 131072, 0, 1376290, 131072, 0, 1376291, 196608, 0, 1376285, 65536, 0)
+layer_0/name = "terrain"
+layer_0/tile_data = PackedInt32Array(1376286, 131072, 0, 1376288, 131072, 0, 1376289, 131072, 0, 1376290, 131072, 0, 1376291, 196608, 0, 1376285, 65536, 0, 1376287, 131072, 0)
 
 [node name="Player" type="CharacterBody2D" parent="World"]
 position = Vector2(576, 324)

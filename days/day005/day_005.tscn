@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://b6svl6t6ysf68"]
+
+[ext_resource type="Script" path="res://days/day005/day_005.gd" id="1_rw1eq"]
+
+[sub_resource type="Theme" id="Theme_u4irb"]
+
+[node name="Day005" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rw1eq")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme = SubResource("Theme_u4irb")
+alignment = 1
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "This scene's only purpose is to let you back to the main menu.
+You can press Esc or the button below."
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Return to main menu"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

@@ -1,13 +1,14 @@
 extends Control
 
 @export var _button_grid_path: NodePath
-@onready var _button_grid := get_node(_button_grid_path)
+@onready var _button_grid : GridContainer = get_node(_button_grid_path)
 
 var days = [
 	[1, "Turbo Tumbler"],
 	[2, "Clicky Grower"],
 	[3, "Pong"],
 	[4, "Angry Ascent"],
+	[5, "Back to the Menu"],
 ]
 
 func create_day_button(day):
