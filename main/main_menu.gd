@@ -1,3 +1,4 @@
+@tool
 extends Control
 
 @export var _button_grid_path: NodePath
@@ -9,6 +10,7 @@ var days = [
 	[3, "Pong"],
 	[4, "Angry Ascent"],
 	[5, "Back to the Menu"],
+	[6, "TBD"],
 ]
 
 func create_day_button(day):
@@ -19,10 +21,13 @@ func create_day_button(day):
 	return button
 
 func _ready():
-	for day in days:
-		var button = create_day_button(day)
-		button.pressed.connect(_on_day_button_pressed.bind(day[0]))
-		_button_grid.add_child(button)
+	if len(_button_grid.get_children()) == 0:
+		for day in days:
+			var button = create_day_button(day)
+			button.pressed.connect(_on_day_button_pressed.bind(day[0]))
+			_button_grid.add_child(button)
+	else:
+		print(_button_grid.get_children())
 
 func _on_day_button_pressed(day_no):
 	var scene_path := "res://days/day%03d/day_%03d.tscn" % [day_no, day_no]

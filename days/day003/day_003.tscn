@@ -1,10 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://di0p5etvmdfbr"]
+[gd_scene load_steps=4 format=3 uid="uid://di0p5etvmdfbr"]
 
 [ext_resource type="Script" path="res://days/day003/PongBoard.gd" id="1_08wit"]
+[ext_resource type="Script" path="res://days/day003/BallBody.gd" id="2_hqdce"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1r4no"]
 friction = 0.0
-bounce = 1.16
+bounce = 1.0
 
 [node name="Day003" type="Control"]
 layout_mode = 3
@@ -36,7 +37,7 @@ polygon = PackedVector2Array(0, 0, 1352, 0, 1352, 100, 0, 100)
 
 [node name="PlayerPaddleBody" type="CharacterBody2D" parent="PongBoard"]
 position = Vector2(10, 324)
-motion_mode = 1
+collision_layer = 2
 
 [node name="PaddlePolygon" type="Polygon2D" parent="PongBoard/PlayerPaddleBody"]
 polygon = PackedVector2Array(-10, -40, 10, -40, 10, 40, -10, 40)
@@ -44,9 +45,9 @@ polygon = PackedVector2Array(-10, -40, 10, -40, 10, 40, -10, 40)
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PongBoard/PlayerPaddleBody"]
 polygon = PackedVector2Array(-10, -40, 10, -40, 10, 40, -10, 40)
 
-[node name="EnemyPaddleBody" type="CharacterBody2D" parent="PongBoard"]
+[node name="EnemyPaddleBody" type="StaticBody2D" parent="PongBoard"]
 position = Vector2(1142, 324)
-motion_mode = 1
+collision_layer = 2
 
 [node name="PaddlePolygon" type="Polygon2D" parent="PongBoard/EnemyPaddleBody"]
 polygon = PackedVector2Array(-10, -40, 10, -40, 10, 40, -10, 40)
@@ -68,11 +69,37 @@ polygon = PackedVector2Array(0, 0, 100, 0, 100, 648, 0, 648)
 
 [node name="BallBody" type="RigidBody2D" parent="PongBoard"]
 position = Vector2(576, 324)
+collision_layer = 2
+collision_mask = 3
+mass = 0.01
 physics_material_override = SubResource("PhysicsMaterial_1r4no")
 gravity_scale = 0.0
+max_contacts_reported = 4
+contact_monitor = true
+linear_damp_mode = 1
+angular_damp_mode = 1
+script = ExtResource("2_hqdce")
 
 [node name="Polygon2D" type="Polygon2D" parent="PongBoard/BallBody"]
 polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PongBoard/BallBody"]
 polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
+
+[node name="CheaterBody" type="StaticBody2D" parent="PongBoard"]
+position = Vector2(1173, 324)
+collision_layer = 2
+
+[node name="PaddlePolygon" type="Polygon2D" parent="PongBoard/CheaterBody"]
+polygon = PackedVector2Array(-10, -40, 10, -40, 10, 40, -10, 40)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PongBoard/CheaterBody"]
+polygon = PackedVector2Array(-10, -1141, 10, -1140, 10, 1140, -10, 1140)
+
+[node name="DebugLabel" type="Label" parent="."]
+layout_mode = 0
+offset_right = 263.0
+offset_bottom = 52.0
+text = "Debug text"
+
+[connection signal="body_shape_entered" from="PongBoard/BallBody" to="PongBoard/BallBody" method="_on_body_shape_entered"]
