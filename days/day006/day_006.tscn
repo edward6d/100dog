@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3 uid="uid://bsn1iocq7q2bh"]
+
+[ext_resource type="Script" path="res://days/day006/Player.gd" id="1_hsmv7"]
+[ext_resource type="PackedScene" uid="uid://7ra6y6n7tdk5" path="res://days/day006/bullet.tscn" id="2_r6pw0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0omxc"]
+size = Vector2(1891, 332)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lm0fm"]
+
+[node name="Day006" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="WorldEdge" type="StaticBody2D" parent="World"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/WorldEdge"]
+position = Vector2(524, -168)
+shape = SubResource("RectangleShape2D_0omxc")
+
+[node name="WorldEdge2" type="StaticBody2D" parent="World"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/WorldEdge2"]
+position = Vector2(524, 812)
+shape = SubResource("RectangleShape2D_0omxc")
+
+[node name="WorldEdge3" type="StaticBody2D" parent="World"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/WorldEdge3"]
+position = Vector2(1320, 368)
+rotation = -1.57079
+shape = SubResource("RectangleShape2D_0omxc")
+
+[node name="WorldEdge4" type="StaticBody2D" parent="World"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/WorldEdge4"]
+position = Vector2(-166, 362)
+rotation = -1.57079
+shape = SubResource("RectangleShape2D_0omxc")
+
+[node name="Player" type="CharacterBody2D" parent="World"]
+position = Vector2(236, 626)
+script = ExtResource("1_hsmv7")
+_bullet_scene = ExtResource("2_r6pw0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Player"]
+shape = SubResource("RectangleShape2D_lm0fm")
+
+[node name="Body" type="Polygon2D" parent="World/Player"]
+color = Color(0.721569, 0.721569, 0.721569, 1)
+polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
+
+[node name="Barrel" type="Polygon2D" parent="World/Player/Body"]
+polygon = PackedVector2Array(-1, -8, 24, -3, 24, 3, -1, 8, -5.82936, -0.135975)
+
+[node name="ShootCooldown" type="Timer" parent="World/Player"]
+wait_time = 0.2
+one_shot = true

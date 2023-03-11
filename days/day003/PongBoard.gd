@@ -1,10 +1,10 @@
 extends Node2D
 
-const PADDLE_BASE_VEL := 200
+const PADDLE_BASE_VEL := 400
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$BallBody.linear_velocity = Vector2(10,1000) # Replace with function body.
+	$BallBody.linear_velocity = Vector2(1000,0) # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):

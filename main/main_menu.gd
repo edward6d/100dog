@@ -10,7 +10,7 @@ var days = [
 	[3, "Pong"],
 	[4, "Angry Ascent"],
 	[5, "Back to the Menu"],
-	[6, "TBD"],
+	[6, "DESTRUCT"],
 ]
 
 func create_day_button(day):

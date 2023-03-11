@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://7ra6y6n7tdk5"]
+
+[ext_resource type="Texture2D" uid="uid://01chxsad7h8r" path="res://common/assets/tiles_packed.png" id="1_achak"]
+[ext_resource type="Script" path="res://days/day006/bullet.gd" id="1_j0p2t"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xtnuk"]
+friction = 0.0
+bounce = 0.5
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_77wor"]
+radius = 6.0
+
+[node name="RigidBody2D" type="RigidBody2D"]
+position = Vector2(100, 47)
+collision_layer = 2
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_xtnuk")
+lock_rotation = true
+script = ExtResource("1_j0p2t")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_achak")
+region_enabled = true
+region_rect = Rect2(199, 127, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_77wor")
+
+[node name="ExplodeTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="ExplodeTimer" to="." method="_on_explode_timer_timeout"]

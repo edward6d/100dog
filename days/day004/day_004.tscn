@@ -60,8 +60,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cu2xc"]
-height = 24.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x4lww"]
+size = Vector2(24, 23)
 
 [node name="Day004" type="Control"]
 layout_mode = 3
@@ -79,7 +79,6 @@ _tile_map_path = NodePath("World/TileMap")
 tile_set = SubResource("TileSet_i1o4j")
 format = 2
 layer_0/name = "terrain"
-layer_0/tile_data = PackedInt32Array(1376286, 131072, 0, 1376288, 131072, 0, 1376289, 131072, 0, 1376290, 131072, 0, 1376291, 196608, 0, 1376285, 65536, 0, 1376287, 131072, 0)
 
 [node name="Player" type="CharacterBody2D" parent="World"]
 position = Vector2(576, 324)
@@ -90,4 +89,5 @@ sprite_frames = SubResource("SpriteFrames_fvcgm")
 animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Player"]
-shape = SubResource("CapsuleShape2D_cu2xc")
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_x4lww")
