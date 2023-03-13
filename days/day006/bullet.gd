@@ -2,6 +2,8 @@ extends RigidBody2D
 
 signal delete_terrain
 
+var exploded = false
+
 func _give_me_poly(vertices:int, radius: float):
 	var angle: float = 2*PI/vertices
 	var poly: PackedVector2Array = []
@@ -19,7 +21,15 @@ func _process(delta):
 
 
 func explode():
-	queue_free()
+	if not exploded:
+		$TTL.start()
+		$Sprite2D.queue_free()
+		$CollisionShape2D.queue_free()
+		$ParticleTrail.emitting = false
+		$Explosion.emitting = true
+		linear_velocity = Vector2.ZERO
+		gravity_scale = 0
+	exploded = true
 
 func _on_explode_timer_timeout():
 	explode()
@@ -46,14 +56,12 @@ func _on_body_entered(body: Node):
 			body.queue_free()
 		elif _get_polygon_area(new_poly_arr[0]) <= 100:
 			body.queue_free()
-			print('antypypec 1')
 			#emit_signal("delete_terrain")
 		else:
 			var new_poly = new_poly_arr[0]
 			body.get_node("CollisionPolygon2D").set_deferred("polygon", new_poly)
 			body.get_node("Polygon2D").set_deferred("polygon", new_poly)
 			var root = body.get_parent()
-			print("New area %f" % _get_polygon_area(new_poly))
 			i = 1
 			while i < len(new_poly_arr):
 				var area = _get_polygon_area(new_poly_arr[i])
@@ -63,7 +71,9 @@ func _on_body_entered(body: Node):
 					new_terrain.get_node("Polygon2D").polygon = new_poly_arr[i]
 					new_terrain.get_node("CollisionPolygon2D").polygon = new_poly_arr[i]
 					root.call_deferred("add_child", new_terrain)
-				else:
-					print('antypypec 2')
 				i += 1
 		explode()
+
+
+func _on_ttl_timeout():
+	queue_free()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://7ra6y6n7tdk5"]
+[gd_scene load_steps=11 format=3 uid="uid://7ra6y6n7tdk5"]
 
 [ext_resource type="Texture2D" uid="uid://01chxsad7h8r" path="res://common/assets/tiles_packed.png" id="1_achak"]
 [ext_resource type="Script" path="res://days/day006/bullet.gd" id="1_j0p2t"]
@@ -10,7 +10,59 @@ bounce = 0.5
 [sub_resource type="CircleShape2D" id="CircleShape2D_77wor"]
 radius = 6.0
 
+[sub_resource type="Gradient" id="Gradient_thdjv"]
+offsets = PackedFloat32Array(0, 0.247863, 0.649573, 0.991453)
+colors = PackedColorArray(1, 1, 0.854902, 1, 0.858824, 0.858824, 0.27451, 0.866667, 0.745098, 0.286275, 0, 0.733333, 0, 0, 0, 0.239216)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_eqfnp"]
+gradient = SubResource("Gradient_thdjv")
+
+[sub_resource type="Curve" id="Curve_0lann"]
+min_value = 1.0
+max_value = 5.0
+_data = [Vector2(0.175676, 1.14545), 0.0, 2.78701, 0, 0, Vector2(1, 4.78182), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_63kdt"]
+width = 32
+curve = SubResource("Curve_0lann")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vqtrb"]
+resource_local_to_scene = true
+emission_shape = 1
+emission_sphere_radius = 7.49
+particle_flag_align_y = true
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
+spread = 7.32
+flatness = 0.22
+initial_velocity_min = 11.63
+initial_velocity_max = 46.51
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 2.0
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_63kdt")
+color_ramp = SubResource("GradientTexture1D_eqfnp")
+sub_emitter_keep_velocity = true
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_grybr"]
+lifetime_randomness = 0.16
+emission_shape = 1
+emission_sphere_radius = 1.0
+particle_flag_align_y = true
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(0, 98, 0)
+initial_velocity_min = 209.35
+initial_velocity_max = 500.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+
 [node name="RigidBody2D" type="RigidBody2D"]
+z_index = 1
 position = Vector2(100, 47)
 collision_layer = 2
 collision_mask = 3
@@ -38,5 +90,23 @@ autostart = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DestructionArea"]
 
+[node name="ParticleTrail" type="GPUParticles2D" parent="."]
+amount = 56
+process_material = SubResource("ParticleProcessMaterial_vqtrb")
+
+[node name="Explosion" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 250
+process_material = SubResource("ParticleProcessMaterial_grybr")
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+randomness = 0.97
+
+[node name="TTL" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="ExplodeTimer" to="." method="_on_explode_timer_timeout"]
+[connection signal="timeout" from="TTL" to="." method="_on_ttl_timeout"]
