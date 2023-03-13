@@ -15,6 +15,9 @@ position = Vector2(100, 47)
 collision_layer = 2
 collision_mask = 3
 physics_material_override = SubResource("PhysicsMaterial_xtnuk")
+continuous_cd = 1
+max_contacts_reported = 3
+contact_monitor = true
 lock_rotation = true
 script = ExtResource("1_j0p2t")
 
@@ -31,4 +34,9 @@ wait_time = 3.0
 one_shot = true
 autostart = true
 
+[node name="DestructionArea" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DestructionArea"]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="ExplodeTimer" to="." method="_on_explode_timer_timeout"]

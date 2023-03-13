@@ -18,38 +18,37 @@ grow_vertical = 2
 
 [node name="World" type="Node2D" parent="."]
 
-[node name="WorldEdge" type="StaticBody2D" parent="World"]
+[node name="Edges" type="Node2D" parent="World"]
 visible = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World/WorldEdge"]
+[node name="WorldEdge" type="StaticBody2D" parent="World/Edges"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Edges/WorldEdge"]
 position = Vector2(524, -168)
 shape = SubResource("RectangleShape2D_0omxc")
 
-[node name="WorldEdge2" type="StaticBody2D" parent="World"]
-visible = false
+[node name="WorldEdge2" type="StaticBody2D" parent="World/Edges"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World/WorldEdge2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Edges/WorldEdge2"]
 position = Vector2(524, 812)
 shape = SubResource("RectangleShape2D_0omxc")
 
-[node name="WorldEdge3" type="StaticBody2D" parent="World"]
-visible = false
+[node name="WorldEdge3" type="StaticBody2D" parent="World/Edges"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World/WorldEdge3"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Edges/WorldEdge3"]
 position = Vector2(1320, 368)
 rotation = -1.57079
 shape = SubResource("RectangleShape2D_0omxc")
 
-[node name="WorldEdge4" type="StaticBody2D" parent="World"]
-visible = false
+[node name="WorldEdge4" type="StaticBody2D" parent="World/Edges"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World/WorldEdge4"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Edges/WorldEdge4"]
 position = Vector2(-166, 362)
 rotation = -1.57079
 shape = SubResource("RectangleShape2D_0omxc")
 
 [node name="Player" type="CharacterBody2D" parent="World"]
-position = Vector2(236, 626)
+position = Vector2(236, 222)
 script = ExtResource("1_hsmv7")
 _bullet_scene = ExtResource("2_r6pw0")
 
@@ -66,3 +65,24 @@ polygon = PackedVector2Array(-1, -8, 24, -3, 24, 3, -1, 8, -5.82936, -0.135975)
 [node name="ShootCooldown" type="Timer" parent="World/Player"]
 wait_time = 0.2
 one_shot = true
+
+[node name="Node" type="Node" parent="World"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="World/Node" groups=["Destructible"]]
+
+[node name="Polygon2D" type="Polygon2D" parent="World/Node/StaticBody2D"]
+color = Color(1, 0.6, 0.517647, 1)
+polygon = PackedVector2Array(1168, 223, 1065, 192, 1094, 555, 995, 562, 1025, 410, 814, 213, 659, 325, 486, 322, 644, 405, 755, 341, 519, 563, 371, 563, 333, 251, 216, 246, 218, 196, 188, 196, 187, 174, 170, 175, 159, 45, 71, 47, -12, 190, -166, 367, -190, 859, 833, 904, 1329, 833, 1352, 336, 1204, 148)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Node/StaticBody2D"]
+visible = false
+polygon = PackedVector2Array(1168, 223, 1065, 192, 1094, 555, 995, 562, 1025, 410, 814, 213, 659, 325, 486, 322, 644, 405, 755, 341, 519, 563, 371, 563, 333, 251, 216, 246, 218, 196, 188, 196, 187, 174, 170, 175, 159, 45, 71, 47, -12, 190, -166, 367, -190, 859, 833, 904, 1329, 833, 1352, 336, 1204, 148)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="World/Node" groups=["Destructible"]]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Node/StaticBody2D2"]
+polygon = PackedVector2Array(146, 489, 346, 489, 346, 529, 146, 529)
+
+[node name="Polygon2D" type="Polygon2D" parent="World/Node/StaticBody2D2"]
+color = Color(1, 0.6, 0.517647, 1)
+polygon = PackedVector2Array(146, 489, 346, 489, 346, 529, 146, 529)

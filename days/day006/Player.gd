@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 const SPEED = 300.0
 const BARREL_VELOCITY = -2
-const BULLET_VELOCITY = 1200
+const BULLET_VELOCITY = 800
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
