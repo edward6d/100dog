@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://br8rvg7pjd71v"]
+
+[ext_resource type="Texture2D" uid="uid://dxiflrplkbgqx" path="res://common/assets/towerDefense_tilesheet.png" id="1_ta4o0"]
+
+[node name="GunT1" type="Node2D"]
+
+[node name="Base" type="Sprite2D" parent="."]
+texture = ExtResource("1_ta4o0")
+region_enabled = true
+region_rect = Rect2(1280, 448, 64, 64)
+
+[node name="Gun" type="Sprite2D" parent="."]
+texture = ExtResource("1_ta4o0")
+offset = Vector2(0, -10)
+region_enabled = true
+region_rect = Rect2(1216, 640, 64, 64)
+
+[node name="Muzzle" type="Node2D" parent="Gun"]
+position = Vector2(0, -40)
