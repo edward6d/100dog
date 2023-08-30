@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://days/day008/card.gd" id="2_jfa5a"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_s54hl"]
-font_size = 28
+font_size = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0r5qd"]
 bg_color = Color(0.886275, 0.478431, 0, 1)
@@ -21,42 +21,44 @@ outline_size = 5
 outline_color = Color(0.862745, 0.815686, 1, 1)
 
 [node name="Card" type="Panel"]
-custom_minimum_size = Vector2(150, 200)
-offset_right = 300.0
-offset_bottom = 400.0
+custom_minimum_size = Vector2(210, 280)
+offset_right = 210.0
+offset_bottom = 280.0
 theme = ExtResource("1_dokib")
 script = ExtResource("2_jfa5a")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_right = 300.0
-offset_bottom = 400.0
+offset_right = 210.0
+offset_bottom = 280.0
+mouse_filter = 2
 theme = ExtResource("1_dokib")
 
 [node name="TitleLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_dokib")
-text = "Confuse"
+text = "Caveman"
 label_settings = SubResource("LabelSettings_s54hl")
 horizontal_alignment = 1
 
 [node name="HeroImage" type="TextureRect" parent="VBoxContainer"]
-custom_minimum_size = Vector2(100, 160)
+custom_minimum_size = Vector2(70, 112)
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("2_d2pvl")
 expand_mode = 2
 stretch_mode = 5
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
-custom_minimum_size = Vector2(240, 160)
+custom_minimum_size = Vector2(190, 120)
 layout_mode = 2
 size_flags_horizontal = 4
+mouse_filter = 2
 theme = ExtResource("1_dokib")
 bbcode_enabled = true
-text = "[center]Much [color=yellow]confuse[/color], 
-wow [/center]
-Veeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeery [color=yellow]confused[/color]
-Now [color=yellow]confused[/color] [b]+ 1[/b] fuse."
+text = "Spawns a single caveman
+ATK: 1 DEF: 1 HP:5
+"
 fit_content = true
 
 [node name="CostLabel" type="Label" parent="."]
@@ -68,3 +70,7 @@ text = "3"
 label_settings = SubResource("LabelSettings_a2mmx")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

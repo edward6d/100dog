@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://c2i5gshpdixnd"]
+[gd_scene load_steps=4 format=3 uid="uid://c2i5gshpdixnd"]
 
 [ext_resource type="Script" path="res://days/day008/day_008.gd" id="1_g5rqj"]
 [ext_resource type="PackedScene" uid="uid://x374dgvmq5yi" path="res://days/day008/card.tscn" id="2_027t2"]
+[ext_resource type="Script" path="res://days/day008/Hand.gd" id="3_0n8cj"]
 
 [node name="Day008" type="Control"]
 layout_mode = 3
@@ -12,3 +13,26 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_g5rqj")
 _card_scene = ExtResource("2_027t2")
+
+[node name="PlayArea" type="Container" parent="."]
+layout_mode = 0
+offset_top = 359.0
+offset_right = 1152.0
+offset_bottom = 653.0
+
+[node name="Hand" type="HBoxContainer" parent="PlayArea"]
+custom_minimum_size = Vector2(1200, 300)
+layout_mode = 2
+alignment = 1
+script = ExtResource("3_0n8cj")
+_card_scene = ExtResource("2_027t2")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 952.0
+offset_top = 107.0
+offset_right = 1126.0
+offset_bottom = 233.0
+text = "Draw"
+
+[connection signal="pressed" from="Button" to="PlayArea/Hand" method="_on_draw_button_pressed"]
