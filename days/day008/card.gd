@@ -9,14 +9,17 @@ func init(cd: CardData):
 	cardData = cd
 	$VBoxContainer/TitleLabel.text = cd.title
 	$VBoxContainer/RichTextLabel.text = cd.text
+	$CostLabel.text = str(cd.cost)
 
-func play():
-	cardData.play_hook.call()
+
+func play(playerState):
+	cardData.play_hook.call(playerState)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	bounce_tween = create_tween()
-	bounce_tween.stop()
+	if cardData.playable:
+		bounce_tween = create_tween()
+		bounce_tween.stop()
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -24,9 +27,10 @@ func _process(delta):
 	pass
 
 func _on_gui_input(event):
-	if event is InputEventMouseButton and event.pressed == true:
-		print("Clicked " + str(event))
-		cardClicked.emit(self)
+	if cardData.playable:
+		if event is InputEventMouseButton and event.pressed == true:
+			print("Clicked " + str(event))
+			cardClicked.emit(self)
 	pass # Replace with function body.
 
 
