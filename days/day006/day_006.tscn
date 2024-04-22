@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://bsn1iocq7q2bh"]
+[gd_scene load_steps=6 format=3 uid="uid://bsn1iocq7q2bh"]
 
+[ext_resource type="Script" path="res://days/day006/day006.gd" id="1_1cyrr"]
 [ext_resource type="Script" path="res://days/day006/Player.gd" id="1_hsmv7"]
 [ext_resource type="PackedScene" uid="uid://7ra6y6n7tdk5" path="res://days/day006/bullet.tscn" id="2_r6pw0"]
 
@@ -15,6 +16,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_1cyrr")
 
 [node name="World" type="Node2D" parent="."]
 
@@ -22,18 +24,21 @@ grow_vertical = 2
 visible = false
 
 [node name="WorldEdge" type="StaticBody2D" parent="World/Edges"]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Edges/WorldEdge"]
 position = Vector2(524, -168)
 shape = SubResource("RectangleShape2D_0omxc")
 
 [node name="WorldEdge2" type="StaticBody2D" parent="World/Edges"]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Edges/WorldEdge2"]
 position = Vector2(524, 812)
 shape = SubResource("RectangleShape2D_0omxc")
 
 [node name="WorldEdge3" type="StaticBody2D" parent="World/Edges"]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Edges/WorldEdge3"]
 position = Vector2(1320, 368)
@@ -41,6 +46,7 @@ rotation = -1.57079
 shape = SubResource("RectangleShape2D_0omxc")
 
 [node name="WorldEdge4" type="StaticBody2D" parent="World/Edges"]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Edges/WorldEdge4"]
 position = Vector2(-166, 362)
@@ -65,6 +71,8 @@ polygon = PackedVector2Array(-1, -8, 24, -3, 24, 3, -1, 8, -5.82936, -0.135975)
 [node name="ShootCooldown" type="Timer" parent="World/Player"]
 wait_time = 0.2
 one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="World/Player"]
 
 [node name="Node" type="Node" parent="World"]
 

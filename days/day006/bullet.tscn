@@ -29,18 +29,16 @@ curve = SubResource("Curve_0lann")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vqtrb"]
 resource_local_to_scene = true
-emission_shape = 1
-emission_sphere_radius = 7.49
 particle_flag_align_y = true
 particle_flag_rotate_y = true
 particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 7.49
 direction = Vector3(0, 1, 0)
 spread = 7.32
 flatness = 0.22
 initial_velocity_min = 11.63
 initial_velocity_max = 46.51
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
 scale_min = 2.0
 scale_max = 2.0
 scale_curve = SubResource("CurveTexture_63kdt")
@@ -49,17 +47,15 @@ sub_emitter_keep_velocity = true
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_grybr"]
 lifetime_randomness = 0.16
-emission_shape = 1
-emission_sphere_radius = 1.0
 particle_flag_align_y = true
 particle_flag_rotate_y = true
 particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 1.0
 spread = 180.0
-gravity = Vector3(0, 98, 0)
 initial_velocity_min = 209.35
 initial_velocity_max = 500.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
+gravity = Vector3(0, 98, 0)
 
 [node name="RigidBody2D" type="RigidBody2D"]
 z_index = 1
@@ -67,10 +63,10 @@ position = Vector2(100, 47)
 collision_layer = 2
 collision_mask = 3
 physics_material_override = SubResource("PhysicsMaterial_xtnuk")
+lock_rotation = true
 continuous_cd = 1
 max_contacts_reported = 3
 contact_monitor = true
-lock_rotation = true
 script = ExtResource("1_j0p2t")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -91,7 +87,7 @@ autostart = true
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DestructionArea"]
 
 [node name="ParticleTrail" type="GPUParticles2D" parent="."]
-amount = 56
+amount = 221
 process_material = SubResource("ParticleProcessMaterial_vqtrb")
 
 [node name="Explosion" type="GPUParticles2D" parent="."]

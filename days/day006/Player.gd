@@ -20,12 +20,18 @@ func shoot():
 	bullet.linear_velocity = Vector2(BULLET_VELOCITY,0).rotated($Body/Barrel.rotation)
 	get_parent().add_child(bullet)
 
+func jump():
+	velocity.y -= 500
+
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
 	# Handle Jump.
+	if Input.is_action_just_pressed("game_jump") and is_on_floor():
+		jump()
+	
 	if Input.is_action_pressed("game_action") and $ShootCooldown.is_stopped():
 		shoot()
 
@@ -53,6 +59,4 @@ func _physics_process(delta):
 			$Body/Barrel.rotation = clamp($Body/Barrel.rotation + delta * BARREL_VELOCITY * barrel_direction,
 											-PI/2, 
 											PI/2)
-	
-
 	move_and_slide()
