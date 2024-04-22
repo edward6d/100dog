@@ -4,11 +4,6 @@ extends Control
 const PlayerState = preload("res://days/day008/player_state.tscn")
 var _player_state = PlayerState.instantiate()
 
-var cards = [
-	CardData.new("Test card", 1, "Ka Pow \n Pow Pow Pow", "res://foobar", {}),
-	CardData.new("Konfuzja", 1, "Kooo[color=red]oooooooooonf[/color]uazja", "res://konfuzja", {"play":func(x): print("Im'ckonaused")}),
-]
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 #	var new_card = _card_scene.instantiate()
@@ -20,7 +15,10 @@ func _ready():
 #	new_card.init(cards[1])
 #	add_child(new_card)
 #	new_card.play()
-	_player_state.money._meter_signal.connect($HUD/HBoxContainer/MoneyValue.update)
+	_player_state.money._meter_signal.connect($HUD/HBoxContainer/MoneyCount.update)
+	_player_state.actions._meter_signal.connect($HUD/HBoxContainer/ActionsCount.update)
+	_player_state.health._meter_signal.connect($HUD/HBoxContainer/HealthCount.update)
+	_player_state.buys._meter_signal.connect($HUD/HBoxContainer/BuysCount.update)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

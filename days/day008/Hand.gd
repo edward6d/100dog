@@ -3,6 +3,12 @@ extends HBoxContainer
 @export var _card_scene: PackedScene
 @onready var main = $"../.."
 
+# todo - move somewhere else and import from other file
+var cards = [
+	CardData.new("Attack", 1, "Ka Pow \n Pow Pow Pow", "res://days/day008/caveman_confused.png", {}),
+	CardData.new("Konfuzja", 1, "Kooo[color=red]oooooooooonf[/color]uazja", "res://days/day008/caveman_confused.png", {"play":func(x): print("Im'ckonaused")}),
+	CardData.new("Money", 0, "[color=yellow]Cha-ching[/color]", "res://days/day008/money.png", {"play":func(x): x.money.update(1)}),
+]
 
 func add_card(cardData):
 	var new_card = _card_scene.instantiate()
@@ -27,8 +33,9 @@ func handle_card_pressed(card):
 		card.play(main._player_state)
 		card.queue_free()
 		main._player_state.money.update(-card.cardData.cost)
+	else:
+		card._on_play_failure()
 
 
 func _on_draw_button_pressed():
-	add_card(CardData.new( "Test card", 1, "Ka Pow \n Pow Pow Pow", "res://foobar", {}))
-	pass # Replace with function body.
+	add_card(cards[randi_range(0, len(cards)-1)])

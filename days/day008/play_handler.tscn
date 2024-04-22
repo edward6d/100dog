@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cudvl4t3q8wev"]
+
+[ext_resource type="Script" path="res://days/day008/play_handlers.gd" id="1_gh5u2"]
+
+[node name="play_handler" type="Node"]
+script = ExtResource("1_gh5u2")

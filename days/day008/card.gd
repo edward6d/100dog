@@ -9,6 +9,9 @@ func init(cd: CardData):
 	cardData = cd
 	$VBoxContainer/TitleLabel.text = cd.title
 	$VBoxContainer/RichTextLabel.text = cd.text
+	# todo - preload textures
+	var res = ResourceLoader.load(cd.hero_image_path)
+	$VBoxContainer/HeroImage.texture = res
 	$CostLabel.text = str(cd.cost)
 
 
@@ -31,8 +34,15 @@ func _on_gui_input(event):
 		if event is InputEventMouseButton and event.pressed == true:
 			print("Clicked " + str(event))
 			cardClicked.emit(self)
-	pass # Replace with function body.
 
+func _on_play_failure():
+	bounce_tween.kill()
+	var cancel_tween = create_tween()
+	modulate = Color.from_hsv(0.0, 1.0, 1.0)
+#	cancel_tween.set_ease(Tween.EASE_OUT)
+#	cancel_tween.set_trans(Tween.TRANS_CUBIC)
+	cancel_tween.tween_property(self, "modulate", Color.from_hsv(1, 0, 1.0), 0.15)
+	
 
 func _on_mouse_entered():
 	if not bounce_tween.is_running():

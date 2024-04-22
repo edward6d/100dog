@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bwy1npxea4b17"]
 
-[ext_resource type="Script" path="res://PlayerState.gd" id="1_34lfq"]
+[ext_resource type="Script" path="res://days/day008/PlayerState.gd" id="1_34lfq"]
 
 [node name="PlayerState" type="Control"]
 layout_mode = 3

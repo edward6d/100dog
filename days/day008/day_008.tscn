@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://c2i5gshpdixnd"]
+[gd_scene load_steps=8 format=3 uid="uid://c2i5gshpdixnd"]
 
 [ext_resource type="Script" path="res://days/day008/day_008.gd" id="1_g5rqj"]
 [ext_resource type="PackedScene" uid="uid://x374dgvmq5yi" path="res://days/day008/card.tscn" id="2_027t2"]
 [ext_resource type="Script" path="res://days/day008/Hand.gd" id="3_0n8cj"]
-[ext_resource type="Script" path="res://days/day008/Actions.gd" id="4_hx5x4"]
+[ext_resource type="Script" path="res://days/day008/HealthCount.gd" id="4_k5nkt"]
 [ext_resource type="Script" path="res://days/day008/MoneyValue.gd" id="4_pauvf"]
+[ext_resource type="Script" path="res://days/day008/ActionsCount.gd" id="5_as44b"]
+[ext_resource type="Script" path="res://days/day008/BuysCount.gd" id="7_rnfu8"]
 
 [node name="Day008" type="Control"]
 layout_mode = 3
@@ -31,7 +33,7 @@ offset_bottom = 51.0
 layout_mode = 2
 text = "Money:"
 
-[node name="MoneyValue" type="Label" parent="HUD/HBoxContainer"]
+[node name="MoneyCount" type="Label" parent="HUD/HBoxContainer"]
 layout_mode = 2
 text = "             "
 script = ExtResource("4_pauvf")
@@ -40,18 +42,19 @@ script = ExtResource("4_pauvf")
 layout_mode = 2
 text = "Health:"
 
-[node name="HealthValue" type="Label" parent="HUD/HBoxContainer"]
+[node name="HealthCount" type="Label" parent="HUD/HBoxContainer"]
 layout_mode = 2
 text = "             "
+script = ExtResource("4_k5nkt")
 
 [node name="Actions" type="Label" parent="HUD/HBoxContainer"]
 layout_mode = 2
 text = "Actions:"
-script = ExtResource("4_hx5x4")
 
 [node name="ActionsCount" type="Label" parent="HUD/HBoxContainer"]
 layout_mode = 2
 text = "             "
+script = ExtResource("5_as44b")
 
 [node name="Buys" type="Label" parent="HUD/HBoxContainer"]
 layout_mode = 2
@@ -60,6 +63,7 @@ text = "Buys"
 [node name="BuysCount" type="Label" parent="HUD/HBoxContainer"]
 layout_mode = 2
 text = "             "
+script = ExtResource("7_rnfu8")
 
 [node name="PlayArea" type="Container" parent="."]
 layout_mode = 0
@@ -76,13 +80,14 @@ _card_scene = ExtResource("2_027t2")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 952.0
-offset_top = 107.0
-offset_right = 1126.0
-offset_bottom = 233.0
+offset_left = 942.0
+offset_top = 158.0
+offset_right = 1116.0
+offset_bottom = 284.0
 text = "Draw"
 
 [node name="Button2" type="Button" parent="."]
+layout_mode = 0
 offset_left = 945.0
 offset_top = 324.0
 offset_right = 1119.0
